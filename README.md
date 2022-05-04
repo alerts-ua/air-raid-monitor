@@ -2,6 +2,8 @@
 
 Shows active air-raid sirens in Ukraine.
 
+Modified version which use alerts.in.ua API
+
 ![display](docs/display_1.jpg)
 
 ### Bill of materials
@@ -27,7 +29,7 @@ Shows active air-raid sirens in Ukraine.
     ```
 3. Clone Air-raid Monitor
     ```
-    git clone https://github.com/dr-mod/air-raid-monitor.git ~/air-raid-monitor
+    git clone https://github.com/alerts-ua/air-raid-monitor.git ~/air-raid-monitor
     ```
 6. Run the application
     ```
