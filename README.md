@@ -31,7 +31,7 @@ Modified version which use alerts.in.ua API
     ```
 3. Clone Air-raid Monitor
     ```
-    git clone https://github.com/alerts-ua/air-raid-monitor.git ~/air-raid-monitor
+    git clone --branch ups_lite https://github.com/alerts-ua/air-raid-monitor.git ~/air-raid-monitor
     ```
 6. Run the application
     ```
