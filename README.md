@@ -19,9 +19,7 @@ Modified version which use alerts.in.ua API
 1. Turn on SPI and I2C via `sudo raspi-config`
     ```
     Interfacing Options -> SPI
-   ```
-       ```
-   Interfacing Options -> I2C
+    Interfacing Options -> I2C
    ```
 2. Install dependencies
     ```
