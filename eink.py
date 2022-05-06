@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 from observer import Observer
 
 try:
-    from waveshare_epd import epd2in13_V2
+    from waveshare_epd import epd2in13_V3 # for Waveshare e-Paper 2.13 inch display (V3)
 except ImportError:
     pass
 
@@ -17,7 +17,7 @@ SCREEN_HEIGHT = 122
 SCREEN_WIDTH = 250
 
 FONT_SMALL = ImageFont.truetype(
-    os.path.join(os.path.dirname(__file__), 'Monaco.ttf'), 11)
+    os.path.join(os.path.dirname(__file__), 'notosans.ttf'), 11) # use notosans for cyrillic
 
 
 class Eink(Observer):
@@ -30,9 +30,9 @@ class Eink(Observer):
 
     @staticmethod
     def _init_display():
-        epd = epd2in13_V2.EPD()
-        epd.init(epd.FULL_UPDATE)
-        epd.Clear(0xFF)
+        epd = epd2in13_V3.EPD()
+        epd.init()
+        epd.clear(0xFF)
         return epd
 
     def update(self, data):
@@ -41,7 +41,7 @@ class Eink(Observer):
         self.epd.display(self.epd.getbuffer(screen_image_rotated))
 
     def close(self):
-        epd2in13_V2.epdconfig.module_exit()
+        epd2in13_V3.epdconfig.module_exit()
 
     def form_image(self, regions, screen_draw, image):
         def pos(x, y):
@@ -61,23 +61,22 @@ class Eink(Observer):
 
     def legend(self, image, pos, regions, screen_draw):
         tmp = Image.new('RGB', (15, 15), "#FFFFFF")
-        ImageDraw.Draw(tmp).rounded_rectangle(pos(0, 0), 3, fill="#FF0000", outline="#000000")
+        ImageDraw.Draw(tmp).rectangle(pos(0, 0),"#FF0000")
         tmp = tmp.convert('1', dither=True)
         counter = Counter(regions.values())
-        screen_draw.rounded_rectangle(pos(1, 106), 3, fill="#FFFFFF", outline="#000000")
-        screen_draw.text((20, 108), "nothing - %d" % counter[None], font=FONT_SMALL)
+        screen_draw.rectangle(pos(1, 106),  fill="#FFFFFF", outline="#000000")
+        screen_draw.text((20, 108), "Немає тривоги (%d)" % counter[None], font=FONT_SMALL)
         image.paste(tmp, (1, 90))
-        screen_draw.text((20, 92), "partial - %d" % counter['partial'], font=FONT_SMALL)
-        screen_draw.rounded_rectangle(pos(1, 74), 3, fill="#000000")
-        screen_draw.text((20, 76), "full - %d" % counter['full'], font=FONT_SMALL)
+        screen_draw.text((20, 92), "Часткова (%d)" % counter['partial'], font=FONT_SMALL)
+        screen_draw.rectangle(pos(1, 74), fill="#000000")
+        screen_draw.text((20, 76), "Тривога (%d)" % counter['full'], font=FONT_SMALL)
 
     def text(self, screen_draw):
-        screen_draw.text((6, 4), "Alerts", font=FONT_SMALL)
-        # screen_draw.text((2, 16), "sirens in", font=FONT_SMALL)
-        # screen_draw.text((2, 28), " Ukraine", font=FONT_SMALL)
+        screen_draw.text((1, 4), "alerts", font=FONT_SMALL)
+        screen_draw.text((1, 16), "in.ua", font=FONT_SMALL)
 
     def connection_lost_text(self, screen_draw):
-        screen_draw.text((79, 56), 'NO CONNECTION', font=FONT_SMALL)
+        screen_draw.text((79, 56), 'Втрачено зв`язок', font=FONT_SMALL)
 
     @staticmethod
     def render_svg(_svg, _scale):
@@ -98,7 +97,7 @@ class Eink(Observer):
         xmlstr = ET.tostring(tree.getroot(), encoding='utf8', method='xml').decode("utf-8")
         img = Eink.render_svg(xmlstr, 1)
         img = img.convert('1', dither=True)
-        img = img.resize((182, 122))
+        img = img.resize((179, 119))
         return img
 
     def show_all(self):

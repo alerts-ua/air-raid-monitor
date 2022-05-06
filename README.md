@@ -2,14 +2,14 @@
 
 Shows active air-raid sirens in Ukraine.
 
-Modified version which use alerts.in.ua API
+Modified version which user alerts.in.ua API
 
-![display](docs/display_1.jpg)
+![display](docs/display_2.png)
 
 ### Bill of materials
 
 * Raspberry Pi Zero W
-* Waveshare eInk 2.13
+* Waveshare eInk 2.13 v3
 * microSD
 * micro-usb cable for power
 
