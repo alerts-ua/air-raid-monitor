@@ -1,8 +1,9 @@
-# Air-raid Monitor
+# Air Raid Monitor for Raspberry Pi 
 
-Shows active air-raid sirens in Ukraine.
+This device shows the current status of air raid sirens in Ukraine. 
 
-Modified version which use alerts.in.ua API
+Modified version that pulls data using alerts.in.ua API.
+
 
 ![display](docs/display_2.png)
 
