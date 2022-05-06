@@ -20,9 +20,7 @@ Modified version that pulls data using alerts.in.ua API.
 1. Turn on SPI and I2C via `sudo raspi-config`
     ```
     Interfacing Options -> SPI
-   ```
-       ```
-   Interfacing Options -> I2C
+    Interfacing Options -> I2C
    ```
 2. Install dependencies
     ```
@@ -34,7 +32,7 @@ Modified version that pulls data using alerts.in.ua API.
     ```
 3. Clone Air-raid Monitor
     ```
-    git clone https://github.com/alerts-ua/air-raid-monitor.git ~/air-raid-monitor
+    git clone --branch ups_lite https://github.com/alerts-ua/air-raid-monitor.git ~/air-raid-monitor
     ```
 6. Run the application
     ```
@@ -47,4 +45,3 @@ Modified version that pulls data using alerts.in.ua API.
 2. `sudo nano /etc/rc.local`
 3. Add the line number 4 before `exit 0`
 4. `su - pi -c "/usr/bin/screen -dm sh -c '/usr/bin/python3 /home/pi/air-raid-monitor/main.py'"`
-
