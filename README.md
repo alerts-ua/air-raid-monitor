@@ -47,3 +47,4 @@ Modified version that pulls data using alerts.in.ua API.
 2. `sudo nano /etc/rc.local`
 3. Add the line number 4 before `exit 0`
 4. `su - pi -c "/usr/bin/screen -dm sh -c '/usr/bin/python3 /home/pi/air-raid-monitor/main.py'"`
+
