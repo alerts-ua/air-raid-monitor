@@ -9,7 +9,8 @@ from observer import Observable
 def get_state():
     with urlopen('https://api.alerts.in.ua/v1/adapters/rpi/alerts/active', timeout=10) as response:
         data = response.read()
-    return json.loads(data)
+        return json.loads(data)
+    return None
 
 
 def main():
