@@ -32,7 +32,7 @@ class Eink(Observer):
     def _init_display():
         epd = epd2in13_V3.EPD()
         epd.init()
-        epd.clear(0xFF)
+       # epd.clear(0xFF)
         return epd
 
     def update(self, data):
