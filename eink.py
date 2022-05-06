@@ -2,7 +2,7 @@ import os
 import xml.etree.ElementTree as ET
 import io
 from collections import Counter
-
+from ups import is_low_battery, battery_capacity
 from svglib.svglib import svg2rlg
 from reportlab.graphics import renderPM
 from PIL import Image, ImageDraw, ImageFont
@@ -32,7 +32,7 @@ class Eink(Observer):
     def _init_display():
         epd = epd2in13_V3.EPD()
         epd.init()
-       # epd.clear(0xFF)
+       # epd.Сlear(0xFF)
         return epd
 
     def update(self, data):
@@ -49,7 +49,9 @@ class Eink(Observer):
             return [(x, y), (x + side, y + side)]
 
         screen_draw.rectangle((0, 0, SCREEN_WIDTH, SCREEN_HEIGHT), fill="#ffffff")
-
+        if is_low_battery():
+            self.low_battery_text(screen_draw)
+            return
         if not regions:
             self.connection_lost_text(screen_draw)
             return
@@ -74,9 +76,13 @@ class Eink(Observer):
     def text(self, screen_draw):
         screen_draw.text((1, 4), "alerts", font=FONT_SMALL)
         screen_draw.text((1, 16), "in.ua", font=FONT_SMALL)
+        screen_draw.text((1, 28), "(%d%%)" % battery_capacity(), font=FONT_SMALL)
 
     def connection_lost_text(self, screen_draw):
         screen_draw.text((79, 56), 'Втрачено зв`язок', font=FONT_SMALL)
+
+    def low_battery_text(self, screen_draw):
+        screen_draw.text((79, 56), 'Низький заряд', font=FONT_SMALL)
 
     @staticmethod
     def render_svg(_svg, _scale):

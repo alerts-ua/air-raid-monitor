@@ -12,18 +12,22 @@ Modified version which use alerts.in.ua API
 * Waveshare eInk 2.13 v3
 * microSD
 * micro-usb cable for power
+* UPS Lite
 
 ### Installation
 
-1. Turn on SPI via `sudo raspi-config`
+1. Turn on SPI and I2C via `sudo raspi-config`
     ```
     Interfacing Options -> SPI
+   ```
+       ```
+   Interfacing Options -> I2C
    ```
 2. Install dependencies
     ```
     sudo apt update
     sudo apt-get install python3-pip python3-pil python3-numpy python3-lxml git 
-    pip3 install RPi.GPIO spidev svglib
+    pip3 install RPi.GPIO spidev svglib smbus
     git clone https://github.com/waveshare/e-Paper.git ~/e-Paper
     pip3 install ~/e-Paper/RaspberryPi_JetsonNano/python/
     ```
