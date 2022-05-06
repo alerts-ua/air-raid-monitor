@@ -2,7 +2,7 @@
 
 Shows active air-raid sirens in Ukraine.
 
-Modified version which user alerts.in.ua API
+Modified version which use alerts.in.ua API
 
 ![display](docs/display_2.png)
 
