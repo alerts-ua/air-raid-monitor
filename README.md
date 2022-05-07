@@ -39,9 +39,18 @@ Modified version that pulls data using alerts.in.ua API.
     python3 ~/air-raid-monitor/main.py
     ```
 
-### Autostart
+### Install as a service
+Run the following command to install the service:
+```bash
+   sudo ./install.sh
+```
+To start/restart/stop the service:
+```bash
+   sudo systemctl start air-raid-monitor
+   sudo systemctl restart air-raid-monitor
+   sudo systemctl stop air-raid-monitor
+```
 
-1. `sudo apt-get install screen`
-2. `sudo nano /etc/rc.local`
-3. Add the line number 4 before `exit 0`
-4. `su - pi -c "/usr/bin/screen -dm sh -c '/usr/bin/python3 /home/pi/air-raid-monitor/main.py'"`
+
+
+
