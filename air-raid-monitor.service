@@ -1,0 +1,10 @@
+[Unit]
+Description=Air Raid Monitor
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=su - pi -c "/usr/bin/python3 /home/pi/air-raid-monitor/main.py > /home/pi/air-raid-monitor/output.log 2>&1"
+
+[Install]
+WantedBy=multi-user.target
